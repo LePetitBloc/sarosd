@@ -1,0 +1,31 @@
+version: '3'
+services:
+  wallet:
+    image: 'lepetitbloc/sarosd:1.0.1.3'
+    restart: always
+    ports:
+      - '8992:8992'
+      - '9891:9891'
+    command:
+      - '-rpcuser=saros-wallet'
+      - '-rpcpassword=qwiwuobq'
+      - '-server=1'
+      - '-listen=0'
+    volumes:
+      - './wallet/:/home/saros/'
+  masternode:
+    image: 'lepetitbloc/sarosd:1.0.1.3'
+    restart: always
+    ports:
+      - '8992:8992'
+      - '9891:9891'
+    command:
+      - '-rpcuser=saros-mn01'
+      - '-rpcpassword=qwiwuobq'
+      - '-rpcallowip=::/0'
+      - '-server=0'
+      - '-listen=1'
+      - '-masternode=1'
+      - '-masternodeprivkey=YourMasternodePrivKey'
+    volumes:
+      - './masternode/:/home/saros/'
